@@ -1,0 +1,34 @@
+server:
+  port: 8000
+
+spring:
+    application:
+      name: api-gateway
+
+zuul:
+  routes:
+    monitor-dashboard:
+      path: /monitor-dashboard/**
+      serviceId: monitor-dashboard
+    a:
+      path: /a/**
+      serviceId: service-a
+    b:
+      path: /b/**
+      serviceId: service-b
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/
+
+
+---
+spring:
+  profiles: cloud
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_LIST}
