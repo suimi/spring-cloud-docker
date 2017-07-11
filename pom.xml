@@ -11,6 +11,9 @@
         <module>config-center</module>
         <module>eureka-server</module>
         <module>monitor-dashboard</module>
+        <module>hystrix-dashboard</module>
+        <module>turbine</module>
+        <module>zipkin-server</module>
         <module>service</module>
     </modules>
     <packaging>pom</packaging>

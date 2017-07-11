@@ -1,0 +1,19 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: service-a
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: config-center
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_LIST}

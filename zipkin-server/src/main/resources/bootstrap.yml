@@ -1,0 +1,12 @@
+server:
+  port: 8883
+spring:
+  application:
+    name: zipkin-server
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_LIST}
+
