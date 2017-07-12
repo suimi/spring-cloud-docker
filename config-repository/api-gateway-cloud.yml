@@ -3,6 +3,9 @@ zuul:
     monitor-dashboard:
       path: /monitor-dashboard/**
       serviceId: monitor-dashboard
+    zipkin-server:
+      path: /zipkin-server
+      serviceId: zipkin-server
     a:
       path: /a/**
       serviceId: service-a
