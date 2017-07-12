@@ -2,7 +2,7 @@
 <configuration>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %X{X-B3-TraceId:-} %X{X-B3-SpanId:-} %X{X-Span-Export:-} %-5level %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n</pattern>
         </encoder>
     </appender>
 
@@ -13,7 +13,7 @@
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %X{X-B3-TraceId:-} %X{X-B3-SpanId:-} %X{X-Span-Export:-} %-5level %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n</pattern>
         </encoder>
     </appender>
 
