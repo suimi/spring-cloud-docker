@@ -6,6 +6,3 @@ zuul:
     a:
       path: /a/**
       serviceId: service-a
-    b:
-      path: /b/**
-      serviceId: service-b
