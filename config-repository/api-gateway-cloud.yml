@@ -13,3 +13,7 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
+
+management:
+  security:
+    enabled: false
