@@ -6,8 +6,6 @@ spring:
       turbine:
         enabled: true
         location: turbine
-      discovery:
-        services: turbine
 
 management:
   security:
