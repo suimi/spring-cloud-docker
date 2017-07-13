@@ -17,6 +17,8 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
+  instance:
+      prefer-ip-address: true
 
 management:
   security:
