@@ -10,6 +10,10 @@ zuul:
     a:
       path: /a/**
       serviceId: service-a
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+
 
 eureka:
   client:
