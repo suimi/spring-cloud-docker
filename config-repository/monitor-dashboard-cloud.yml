@@ -6,7 +6,6 @@ spring:
       turbine:
         enabled: true
         clusters: service-a,service-b
-        url: http://10.253.0.7:8881/turbine.stream
 
 eureka:
   instance:
