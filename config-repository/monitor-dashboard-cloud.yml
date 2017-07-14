@@ -7,6 +7,11 @@ spring:
         enabled: true
         url: http://turbine:8881/turbine.stream
 
+eureka:
+  instance:
+      prefer-ip-address: true
+
+
 management:
   security:
     enabled: false
