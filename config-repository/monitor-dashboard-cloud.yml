@@ -5,6 +5,7 @@ spring:
         endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,heapdump,hystrix.stream,turbine.stream
       turbine:
         enabled: true
+        clusters: default
         url: http://turbine:8881/turbine.stream
 
 eureka:
