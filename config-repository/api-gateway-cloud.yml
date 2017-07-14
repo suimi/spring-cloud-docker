@@ -20,6 +20,9 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
+ribbon:
+  connectTimeout: 3000
+  readTimeout: 60000
 
 eureka:
   client:
