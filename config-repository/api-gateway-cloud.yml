@@ -3,6 +3,7 @@ zuul:
     monitor-dashboard:
       path: /monitor-dashboard/**
       serviceId: monitor-dashboard
+      sensitiveHeaders: Cookie,Set-Cookie,Connection
     zipkin-server:
       path: /zipkin/**
       serviceId: zipkin-server
@@ -23,6 +24,7 @@ hystrix:
 ribbon:
   connectTimeout: 3000
   readTimeout: 60000
+
 
 eureka:
   client:
