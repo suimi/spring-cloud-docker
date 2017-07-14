@@ -6,7 +6,7 @@ spring:
       turbine:
         enabled: true
         clusters: default
-        url: http://turbine:8881/turbine.stream
+        url: http://10.253.0.7:8881/turbine.stream
 
 eureka:
   instance:
