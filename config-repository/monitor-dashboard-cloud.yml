@@ -5,7 +5,7 @@ spring:
         endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,hystrix.stream,turbine.stream
       turbine:
         enabled: true
-        location: http://turbine:8881
+        url: http://turbine:8881/turbine.stream
 
 management:
   security:
