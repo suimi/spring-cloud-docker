@@ -6,6 +6,8 @@ spring:
       turbine:
         enabled: true
         clusters: service-a,service-b
+      discovery:
+        services: *
 
 eureka:
   instance:
