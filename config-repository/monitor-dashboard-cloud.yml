@@ -2,11 +2,11 @@ spring:
   boot:
     admin:
       routes:
-        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,hystrix.stream,turbine.stream
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,heapdump,hystrix.stream,turbine.stream
       turbine:
         enabled: true
-        clusters: default
-        location: turbine
+        url: http://turbine:8881/turbine.stream
+
 management:
   security:
     enabled: false
