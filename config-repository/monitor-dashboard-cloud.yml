@@ -1,3 +1,10 @@
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
+  add-host-header: true
+  host:
+    socket-timeout-millis: 60000
+  retryable: true
+
 spring:
   boot:
     admin:
@@ -18,9 +25,4 @@ management:
   security:
     enabled: false
 
-zuul:
-  sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
-  add-host-header: true
-  host:
-    socket-timeout-millis: 60000
-  retryable: true
+
