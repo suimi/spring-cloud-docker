@@ -9,7 +9,7 @@ spring:
   boot:
     admin:
       routes:
-        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,heapdump,hystrix.stream
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,heapdump,hystrix.stream,turbine.stream
       turbine:
         enabled: true
         clusters: service-a,service-b
