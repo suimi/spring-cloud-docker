@@ -1,9 +1,11 @@
 zuul:
+  sensitiveHeaders:
+  add-host-header: true
   routes:
     monitor-dashboard:
       path: /monitor-dashboard/**
       serviceId: monitor-dashboard
-      sensitiveHeaders: Cookie,Set-Cookie,Connection
+
     zipkin-server:
       path: /zipkin/**
       serviceId: zipkin-server
@@ -14,6 +16,7 @@ zuul:
   host:
     socket-timeout-millis: 60000
     connect-timeout-millis: 60000
+
 hystrix:
   command:
     default:
