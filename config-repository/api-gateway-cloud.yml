@@ -5,7 +5,7 @@ zuul:
     monitor-dashboard:
       path: /monitor-dashboard/**
       serviceId: monitor-dashboard
-
+      retryable: true
     zipkin-server:
       path: /zipkin/**
       serviceId: zipkin-server
