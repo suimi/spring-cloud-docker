@@ -1,5 +1,5 @@
 zuul:
-  sensitiveHeaders:
+  sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
   add-host-header: true
   routes:
     monitor-dashboard:
@@ -31,8 +31,6 @@ monitor-dashboard:
   ribbon:
     ConnectTimeout: 6000
     ReadTimeout: 60000
-#  MaxAutoRetries: 0
-#  MaxAutoRetriesNextServer: 1
 
 eureka:
   client:
