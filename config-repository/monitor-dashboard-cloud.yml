@@ -21,3 +21,6 @@ management:
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
   add-host-header: true
+  host:
+    socket-timeout-millis: 60000
+  retryable: true
