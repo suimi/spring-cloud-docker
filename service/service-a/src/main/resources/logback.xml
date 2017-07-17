@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %X{X-B3-TraceId:-} %X{X-B3-SpanId:-} %X{X-Span-Export:-} %-5level %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n</pattern>
