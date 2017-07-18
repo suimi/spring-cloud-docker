@@ -8,6 +8,10 @@ spring:
     admin:
       routes:
         endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,hystrix.stream
+      turbine:
+        enabled: true
+        location: turbine
+
 eureka:
   client:
     registerWithEureka: true

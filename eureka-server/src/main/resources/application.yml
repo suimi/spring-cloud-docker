@@ -23,8 +23,18 @@ server:
 eureka:
   instance:
     hostname: localhost
+    lease-expiration-duration-in-seconds:
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/,${ADDITIONAL_EUREKA_SERVER_LIST}
+
+logging:
+  path: /logs/common/
+  file: ${spring.application.name}.log
+  level:
+    root: info
+    org.springframework.cloud: debug
+  pattern:
+    file: %d{HH:mm:ss.SSS} %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] [%thread] %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n

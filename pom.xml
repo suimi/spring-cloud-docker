@@ -22,11 +22,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.cloud>Dalston.RELEASE</spring.cloud>
-        <spring.boot>1.5.2.RELEASE</spring.boot>
-        <spring.boot.admin>1.5.0</spring.boot.admin>
+        <spring.cloud>Dalston.SR1</spring.cloud>
+        <spring.boot>1.5.4.RELEASE</spring.boot>
+        <spring.boot.admin>1.5.2</spring.boot.admin>
         <springfox.swagger2>2.6.0</springfox.swagger2>
         <net.sf.ucanaccess>3.0.7</net.sf.ucanaccess>
+        <zipkin.version>1.28.1</zipkin.version>
         <docker.image.prefix>ulinkcare</docker.image.prefix>
         <docker.repostory.aliyun>registry.cn-hangzhou.aliyuncs.com</docker.repostory.aliyun>
     </properties>
@@ -95,6 +96,22 @@
                 <artifactId>spring-boot-admin-server-ui-activiti</artifactId>
                 <version>${spring.boot.admin}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin</artifactId>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${zipkin.version}</version>
+                <scope>runtime</scope>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -118,15 +135,68 @@
                     <version>0.4.13</version>
                     <executions>
                         <execution>
+                            <id>remove-image</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>removeImage</goal>
+                            </goals>
+                            <configuration>
+                                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>remove-repo-image</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>removeImage</goal>
+                            </goals>
+                            <configuration>
+                                <imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}</imageName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>build-image</id>
+                            <phase>package</phase>
                             <goals>
                                 <goal>build</goal>
                             </goals>
-                            <phase>package</phase>
                         </execution>
+                        <execution>
+                            <id>tag-image</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>tag</goal>
+                            </goals>
+                            <configuration>
+                                <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                                <newName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:${project.version}</newName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>tag-latest-image</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>tag</goal>
+                            </goals>
+                            <configuration>
+                                <image>${docker.image.prefix}/${project.artifactId}:latest</image>
+                                <newName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:latest</newName>
+                            </configuration>
+                        </execution>
+                        <!--<execution>-->
+                            <!--<id>push-image</id>-->
+                            <!--<phase>package</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>push</goal>-->
+                            <!--</goals>-->
+                            <!--<configuration>-->
+                                <!--<imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:latest</imageName>-->
+                                <!--<imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>-->
+                            <!--</configuration>-->
+                        <!--</execution>-->
                     </executions>
                     <configuration>
                         <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                        <newName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}</newName>
                         <dockerDirectory>${project.basedir}</dockerDirectory>
                         <resources>
                             <resource>

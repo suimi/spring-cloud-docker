@@ -21,15 +21,15 @@ hystrix:
   command:
     default:
       execution:
-      timeout:
-        enabled: false
+        timeout:
+          enabled: false
         isolation:
           strategy: THREAD
           thread:
             timeoutInMilliseconds: 60000
 monitor-dashboard:
   ribbon:
-    ConnectTimeout: 6000
+    ConnectTimeout: 3000
     ReadTimeout: 60000
 
 eureka:
@@ -44,3 +44,12 @@ eureka:
 management:
   security:
     enabled: false
+
+logging:
+  path: /logs/common/
+  file: ${spring.application.name}.log
+  level:
+    root: info
+    org.springframework.cloud: debug
+  pattern:
+    file: %d{HH:mm:ss.SSS} %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] [%thread] %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n

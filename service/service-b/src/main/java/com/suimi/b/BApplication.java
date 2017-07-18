@@ -8,6 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableHystrix
+
 public class BApplication {
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 server:
-  port: 8881
+  port: 8880
 
 spring:
   application:
-    name: turbine
+    name: monitor-dashboard
   cloud:
     config:
       enabled: true
