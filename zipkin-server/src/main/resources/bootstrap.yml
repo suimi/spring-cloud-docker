@@ -7,13 +7,19 @@ eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
+    #设置拉取服务注册信息时间
+    registry-fetch-interval-seconds: 30
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
   instance:
     prefer-ip-address: true
+    #指定续约更新频率
+    lease-renewal-interval-in-seconds: 15
+    #设置过期剔除时间，默认90s
+    lease-expiration-duration-in-seconds: 45
 
 logging:
-  path: /logs/common/
+  path: /logs/
   file: ${spring.application.name}.log
   level:
     root: info

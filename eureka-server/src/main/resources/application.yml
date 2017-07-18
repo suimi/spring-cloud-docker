@@ -21,12 +21,22 @@ server:
   port: 9999
 
 eureka:
+  server:
+    #禁用自我保护模式
+    enable-self-preservation: false
+    #设置清理无效节点的时间间隔
+    eviction-interval-timer-in-ms: 30000
   instance:
     hostname: localhost
-    lease-expiration-duration-in-seconds:
+    #指定续约更新频率
+    lease-renewal-interval-in-seconds: 15
+    #设置过期剔除时间，默认90s
+    lease-expiration-duration-in-seconds: 45
   client:
     registerWithEureka: false
     fetchRegistry: false
+    #设置拉取服务注册信息时间
+    registry-fetch-interval-seconds: 30
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/,${ADDITIONAL_EUREKA_SERVER_LIST}
 

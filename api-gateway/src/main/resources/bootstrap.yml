@@ -15,5 +15,7 @@ eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
+    #设置拉取服务注册信息时间
+    registry-fetch-interval-seconds: 30
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
