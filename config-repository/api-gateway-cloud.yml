@@ -46,7 +46,7 @@ management:
     enabled: false
 
 logging:
-  path: /logs/common/
+  path: /logs/
   file: ${spring.application.name}.log
   level:
     root: info
