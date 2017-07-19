@@ -16,6 +16,8 @@ spring:
       turbine:
         enabled: true
         clusters: service-a,service-b
+      discovery:
+        services: service*,api*,config*,tur*,zip*
 
 eureka:
   instance:
