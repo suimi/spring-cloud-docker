@@ -1,5 +1,5 @@
 server:
-  context-path: monitor
+  context-path: /monitor
 
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
