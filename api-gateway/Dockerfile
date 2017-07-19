@@ -3,9 +3,6 @@ VOLUME /logs
 ADD target/api-gateway*.jar api-gateway.jar
 RUN sh -c 'touch /api-gateway.jar'
 #时区设置
-# CentOS
-RUN echo "Asia/shanghai" > /etc/timezone;
-# Ubuntu
-#RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 EXPOSE 8000
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar api-gateway.jar","--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]

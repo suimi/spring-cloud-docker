@@ -13,8 +13,6 @@ spring:
       turbine:
         enabled: true
         clusters: service-a,service-b
-      discovery:
-        services: service*,api*,config*,tur*,zip*
 
 eureka:
   instance:
@@ -26,11 +24,6 @@ management:
     enabled: false
 
 logging:
-  path: /logs/
-  file: ${spring.application.name}.log
   level:
     root: info
     org.springframework.cloud: debug
-  pattern:
-    file: "%d{MM-dd HH:mm:ss.SSS} %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] [%thread] %logger{40}.%method(%L) -- %msg%n"
-
