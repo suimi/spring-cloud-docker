@@ -1,6 +1,3 @@
-server:
-  context-path: /monitor
-
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
   add-host-header: true
