@@ -54,4 +54,4 @@ logging:
     root: info
     org.springframework.cloud: debug
   pattern:
-    file: %d{HH:mm:ss.SSS} %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] [%thread] %logger{40}.%method\(%L\) - %replace(%msg){'("(pin|password)":"\w+"|&lt;pin&gt;\w+&lt;/pin&gt;)',''}%n
+    file: %d{HH:mm:ss.SSS} %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] [%thread] %logger{40}.%method\(%L\) -- %msg%n
