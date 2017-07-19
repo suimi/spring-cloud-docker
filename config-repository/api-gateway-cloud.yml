@@ -2,10 +2,10 @@ zuul:
   sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
   add-host-header: true
   routes:
-    monitor-dashboard:
-      path: /monitor-dashboard/**
+    monitor:
+      path: /monitor/**
       serviceId: monitor-dashboard
-      retryable: true
+      stripPrefix: false
     zipkin:
       path: /zipkin/**
       serviceId: zipkin-server
