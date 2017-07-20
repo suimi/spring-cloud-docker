@@ -13,6 +13,9 @@ spring:
       turbine:
         enabled: true
         clusters: service-a,service-b
+      monitor:
+        connect-timeout: 3000
+        read-timeout: 60000
 
 eureka:
   instance:
