@@ -23,7 +23,7 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.cloud>Dalston.SR1</spring.cloud>
-        <spring.boot>1.5.4.RELEASE</spring.boot>
+        <spring.boot>1.5.3.RELEASE</spring.boot>
         <spring.boot.admin>1.5.2</spring.boot.admin>
         <springfox.swagger2>2.6.0</springfox.swagger2>
         <net.sf.ucanaccess>3.0.7</net.sf.ucanaccess>
