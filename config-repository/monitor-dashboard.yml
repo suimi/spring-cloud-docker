@@ -1,0 +1,29 @@
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie,Authorization,Content-Type,Connection
+  add-host-header: true
+  host:
+    socket-timeout-millis: 60000
+  retryable: true
+
+spring:
+  boot:
+    admin:
+      routes:
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,heapdump,hystrix.stream,turbine.stream
+      turbine:
+        enabled: true
+        clusters: service-a,service-b
+
+eureka:
+  instance:
+      prefer-ip-address: true
+
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    root: info
+    org.springframework.cloud: debug
