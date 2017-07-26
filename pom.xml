@@ -17,7 +17,7 @@
         <module>service</module>
     </modules>
     <packaging>pom</packaging>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -29,7 +29,9 @@
         <net.sf.ucanaccess>3.0.7</net.sf.ucanaccess>
         <zipkin.version>1.28.1</zipkin.version>
         <docker.image.prefix>ulinkcare</docker.image.prefix>
-        <docker.repostory.aliyun>registry.cn-hangzhou.aliyuncs.com</docker.repostory.aliyun>
+        <!--<docker.repository.aliyun>registry.cn-hangzhou.aliyuncs.com</docker.repository.aliyun>-->
+        <docker.repository.aliyun>registry-internal.cn-hangzhou.aliyuncs.com</docker.repository.aliyun>
+        <docker.repository.ulinkcare>118.178.138.63:9020</docker.repository.ulinkcare>
     </properties>
 
     <scm>
@@ -113,14 +115,46 @@
                 <scope>runtime</scope>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>api-gateway</module>
+            </modules>
+            <properties>
+                <serverId>docker-ulinkcare</serverId>
+                <docker.repository>${docker.repository.ulinkcare}</docker.repository>
+            </properties>
+        </profile>
+        <profile>
+            <id>aliyun</id>
+            <properties>
+                <docker.repository>${docker.repository.aliyun}</docker.repository>
+                <serverId>docker-aliyun</serverId>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot}</version>
                     <executions>
                         <execution>
                             <goals>
@@ -135,24 +169,11 @@
                     <version>0.4.13</version>
                     <executions>
                         <execution>
-                            <id>remove-image</id>
-                            <phase>clean</phase>
-                            <goals>
-                                <goal>removeImage</goal>
-                            </goals>
-                            <configuration>
-                                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                            </configuration>
-                        </execution>
-                        <execution>
                             <id>remove-repo-image</id>
                             <phase>clean</phase>
                             <goals>
                                 <goal>removeImage</goal>
                             </goals>
-                            <configuration>
-                                <imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}</imageName>
-                            </configuration>
                         </execution>
                         <execution>
                             <id>build-image</id>
@@ -161,43 +182,12 @@
                                 <goal>build</goal>
                             </goals>
                         </execution>
-                        <execution>
-                            <id>tag-image</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>tag</goal>
-                            </goals>
-                            <configuration>
-                                <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
-                                <newName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:${project.version}</newName>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>tag-latest-image</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>tag</goal>
-                            </goals>
-                            <configuration>
-                                <image>${docker.image.prefix}/${project.artifactId}:latest</image>
-                                <newName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:latest</newName>
-                            </configuration>
-                        </execution>
-                        <!--<execution>-->
-                            <!--<id>push-image</id>-->
-                            <!--<phase>package</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>push</goal>-->
-                            <!--</goals>-->
-                            <!--<configuration>-->
-                                <!--<imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:latest</imageName>-->
-                                <!--<imageName>${docker.repostory.aliyun}/${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>-->
-                            <!--</configuration>-->
-                        <!--</execution>-->
                     </executions>
                     <configuration>
-                        <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                        <imageName>${docker.repository}/${docker.image.prefix}/${project.artifactId}</imageName>
                         <dockerDirectory>${project.basedir}</dockerDirectory>
+                        <serverId>${serverId}</serverId>
+                        <registryUrl>${docker.repository}</registryUrl>
                         <resources>
                             <resource>
                                 <targetPath>/</targetPath>
@@ -213,19 +203,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.5.2</version>
                     <configuration>
                         <branchBase>http://118.178.138.63/repos/src/common/branches/cloud-common</branchBase>
-                        <branchName>${version}-branch</branchName>
+                        <branchName>${project.version}-branch</branchName>
                         <tagBase>http://118.178.138.63/repos/src/common/tags/cloud-common</tagBase>
                         <remoteTagging>false</remoteTagging>
                         <suppressCommitBeforeTag>false</suppressCommitBeforeTag>
