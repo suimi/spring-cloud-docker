@@ -123,9 +123,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <modules>
-                <module>api-gateway</module>
-            </modules>
             <properties>
                 <serverId>docker-ulinkcare</serverId>
                 <docker.repository>${docker.repository.ulinkcare}</docker.repository>
@@ -137,6 +134,53 @@
                 <docker.repository>${docker.repository.aliyun}</docker.repository>
                 <serverId>docker-aliyun</serverId>
             </properties>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>0.4.13</version>
+                            <executions>
+                                <execution>
+                                    <id>remove-repo-image</id>
+                                    <phase>clean</phase>
+                                    <goals>
+                                        <goal>removeImage</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>build-image</id>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>build</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                            <configuration>
+                                <imageName>${docker.repository}/${docker.image.prefix}/${project.artifactId}</imageName>
+                                <dockerDirectory>${project.basedir}</dockerDirectory>
+                                <serverId>${serverId}</serverId>
+                                <registryUrl>${docker.repository}</registryUrl>
+                                <resources>
+                                    <resource>
+                                        <targetPath>/</targetPath>
+                                        <directory>${project.build.directory}</directory>
+                                        <include>${project.build.finalName}.jar</include>
+                                    </resource>
+                                </resources>
+                                <imageTags>
+                                    <imageTag>${project.version}</imageTag>
+                                    <imageTag>latest</imageTag>
+                                </imageTags>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
         </profile>
     </profiles>
 
@@ -163,44 +207,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                <plugin>
-                    <groupId>com.spotify</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.4.13</version>
-                    <executions>
-                        <execution>
-                            <id>remove-repo-image</id>
-                            <phase>clean</phase>
-                            <goals>
-                                <goal>removeImage</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>build-image</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <imageName>${docker.repository}/${docker.image.prefix}/${project.artifactId}</imageName>
-                        <dockerDirectory>${project.basedir}</dockerDirectory>
-                        <serverId>${serverId}</serverId>
-                        <registryUrl>${docker.repository}</registryUrl>
-                        <resources>
-                            <resource>
-                                <targetPath>/</targetPath>
-                                <directory>${project.build.directory}</directory>
-                                <include>${project.build.finalName}.jar</include>
-                            </resource>
-                        </resources>
-                        <imageTags>
-                            <imageTag>${project.version}</imageTag>
-                            <imageTag>latest</imageTag>
-                        </imageTags>
-                    </configuration>
-                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
