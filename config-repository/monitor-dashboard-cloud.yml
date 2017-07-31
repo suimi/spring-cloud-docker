@@ -10,6 +10,11 @@ spring:
 eureka:
   instance:
       prefer-ip-address: true
+      #指定续约更新频率
+      lease-renewal-interval-in-seconds: 15
+      #设置过期剔除时间，默认90s
+      lease-expiration-duration-in-seconds: 45
+
 
 
 management:

@@ -6,4 +6,4 @@ RUN sh -c 'touch /service-a.jar'
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/shanghai" > /etc/timezone
 EXPOSE 8010
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar service-a.jar","--spring.profiles.active=${SPRING_PROFILES_ACTIVE}" ]
+ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar service-a.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE}

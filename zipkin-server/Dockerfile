@@ -6,4 +6,4 @@ RUN sh -c 'touch /zipkin-server.jar'
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/shanghai" > /etc/timezone
 EXPOSE 8883
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar zipkin-server.jar","--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
+ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar zipkin-server.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE}
