@@ -17,7 +17,7 @@ eureka:
 
 management:
   security:
-    enabled: false
+    enabled: true
 
 security:
   user:
