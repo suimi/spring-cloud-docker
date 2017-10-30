@@ -99,6 +99,11 @@
                 <version>${spring.boot.admin}</version>
             </dependency>
             <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui-login</artifactId>
+                <version>${spring.boot.admin}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.zipkin.java</groupId>
                 <artifactId>zipkin-server</artifactId>
                 <version>${zipkin.version}</version>
