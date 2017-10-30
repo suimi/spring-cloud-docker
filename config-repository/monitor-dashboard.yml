@@ -19,6 +19,11 @@ management:
   security:
     enabled: false
 
+security:
+  user:
+    name: user
+    password: 123
+
 logging:
   level:
     root: info
