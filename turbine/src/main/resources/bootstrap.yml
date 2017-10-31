@@ -18,3 +18,8 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
 
+#如果应用配置了context-path/management.context-path, hystrix的路径也相应发生了变化，需要配置
+#配置规则：turbine.instanceUrlSuffix.<CLUSTERNAME>=/**/hystrix.stream
+turbine:
+  instanceUrlSuffix:
+    service-a: /sa/hystrix.stream
