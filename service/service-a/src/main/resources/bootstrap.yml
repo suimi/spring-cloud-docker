@@ -1,5 +1,6 @@
 server:
   port: 8010
+  context-path: /sa
 
 spring:
   application:
@@ -18,3 +19,22 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_LIST}
+
+  instance:
+#    metadata-map:
+#      management:
+#        context-path: ${server.context-path}
+#如果添加了context-paht 或是 mangement.context-path，需要配置status 和 health 端点路径，以及home-path 和management.context-path
+#
+# 配置后具体路径规则如下：
+# server.context-path=/v1 results in :8080/v1/[application endpoint] and :8080/v1/[actuator endpoint]
+# server.context-path=/v1 and management.context-path=/manage results in :8080/v1/[application endpoint] and :8080/v1/manage/[actuator endpoint]
+# server.context-path=/v1 and management.port=8081 results in :8080/v1/[application endpoint] and :8081/[actuator endpoint]
+# server.context-path=/v1, management.port=8081 and management.context-path=/manage results in :8080/v1/[application endpoint] and :8081/manage/[actuator endpoint]
+    statusPageUrlPath: ${server.context-path}/info
+    healthCheckUrlPath: ${server.context-path}/health
+    home-page-url-path: ${server.context-path}
+
+security:
+  basic:
+    enabled: true
