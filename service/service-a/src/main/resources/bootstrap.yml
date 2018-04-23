@@ -1,5 +1,5 @@
 server:
-  port: 8010
+  port: 8011
   context-path: /sa
 
 spring:
@@ -7,7 +7,7 @@ spring:
     name: service-a
   cloud:
     config:
-      enabled: true
+      enabled: false
       discovery:
         enabled: true
         service-id: config-center

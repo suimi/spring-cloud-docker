@@ -4,6 +4,8 @@
  */
 package com.suimi.a.controllers;
 
+import com.suimi.a.feign.Service;
+import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.support.RequestContext;
+
+import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("Aservice")
@@ -31,6 +36,10 @@ public class AController {
 
     @Autowired
     private BService bService;
+
+    @Autowired
+    private Service service;
+
 
     @Autowired
     private ReduceClient reduceClient;
@@ -86,6 +95,23 @@ public class AController {
     public int reduce(@PathVariable("a") int a, @PathVariable("b") int b) {
         return reduceClient.reduce(a, b);
     }
+
+    @ApiOperation(value = "减", notes = "两数相加")
+    @ApiImplicitParams({@ApiImplicitParam(name = "a", value = "参数a", required = true, paramType = "path", dataType = "int"), @ApiImplicitParam(name = "b", value = "参数b", required = true, paramType = "path", dataType = "int")})
+    @RequestMapping(value = "reduce/{header}/{a}/{b}", method = RequestMethod.GET)
+    @HystrixCommand
+    public int reduce(@PathVariable("header")String header,@PathVariable("a") int a, @PathVariable("b") int b) {
+        return bService.reduce(header,a, b);
+    }
+
+    @ApiOperation(value = "减", notes = "两数相加")
+    @ApiImplicitParams({@ApiImplicitParam(name = "a", value = "参数a", required = true, paramType = "path", dataType = "int"), @ApiImplicitParam(name = "b", value = "参数b", required = true, paramType = "path", dataType = "int")})
+    @RequestMapping(value = "reduce1/{header}/{a}/{b}", method = RequestMethod.GET)
+    @HystrixCommand
+    public int reduce1(@PathVariable("header")String header,@PathVariable("a") int a, @PathVariable("b") int b) {
+        return service.reduce(header,a, b);
+    }
+
 
 
     @ApiOperation(value = "测试异常", notes = "测试异常")

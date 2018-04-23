@@ -1,14 +1,14 @@
 server:
-  port: 8020
+  port: 8021
 
 spring:
   application:
-    name: service-b
+    name: service-c
   cloud:
     config:
       enabled: true
       discovery:
-        enabled: true
+        enabled: false
         service-id: config-center
 
 eureka:

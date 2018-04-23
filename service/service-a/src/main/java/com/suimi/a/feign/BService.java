@@ -5,13 +5,18 @@
 package com.suimi.a.feign;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient("SERVICE-B")
+@FeignClient(value = "SERVICE-B",configuration = ClientConfig.class)
 public interface BService {
 
     @RequestMapping(value = "add/{a}/{b}", method = RequestMethod.GET)
     int add(@PathVariable("a") int a, @PathVariable("b") int b);
+
+    @RequestMapping(value = "reduce/{a}/{b}", method = RequestMethod.GET)
+    int reduce(@RequestHeader("nodeName") String nodeName, @PathVariable("a") int a, @PathVariable("b") int b);
 }
