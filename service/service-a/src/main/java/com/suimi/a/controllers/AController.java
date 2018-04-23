@@ -8,10 +8,7 @@ import com.suimi.a.feign.Service;
 import feign.Feign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.suimi.a.exception.AException;
@@ -106,9 +103,9 @@ public class AController {
 
     @ApiOperation(value = "减", notes = "两数相加")
     @ApiImplicitParams({@ApiImplicitParam(name = "a", value = "参数a", required = true, paramType = "path", dataType = "int"), @ApiImplicitParam(name = "b", value = "参数b", required = true, paramType = "path", dataType = "int")})
-    @RequestMapping(value = "reduce1/{header}/{a}/{b}", method = RequestMethod.GET)
+    @RequestMapping(value = "reduce1/{a}/{b}", method = RequestMethod.GET)
     @HystrixCommand
-    public int reduce1(@PathVariable("header")String header,@PathVariable("a") int a, @PathVariable("b") int b) {
+    public int reduce1(@RequestHeader("header")String header,@PathVariable("a") int a, @PathVariable("b") int b) {
         return service.reduce(header,a, b);
     }
 

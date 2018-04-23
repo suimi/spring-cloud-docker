@@ -114,12 +114,12 @@ import java.util.regex.Pattern;
         if (key instanceof HttpHeaders) {
             HttpHeaders headers = (HttpHeaders)key;
             if (headers.containsKey(FeignRibbonConstants.NODE_NAME_REG)) {
-                String first = headers.getFirst(FeignRibbonConstants.NODE_NAME_REG);
-                if (StringUtils.isNotBlank(first)) {
+                String reg = headers.getFirst(FeignRibbonConstants.NODE_NAME_REG);
+                if (StringUtils.isNotBlank(reg)) {
                     List<Server> matchedServers = new ArrayList<>();
-                    Pattern pattern = Pattern.compile(first.toUpperCase(Locale.ROOT));
                     servers.forEach(server -> {
-                        if (pattern.matcher(server.getMetaInfo().getAppName()).matches()) {
+                        String appName = server.getMetaInfo().getAppName().toUpperCase(Locale.ROOT);
+                        if (appName.matches(reg)) {
                             matchedServers.add(server);
                         }
                     });

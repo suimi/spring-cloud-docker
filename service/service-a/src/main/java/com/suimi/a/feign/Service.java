@@ -4,15 +4,14 @@
  */
 package com.suimi.a.feign;
 
+import com.suimi.config.ClientConfig;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "SERVICE", configuration = {ClientConfig.class})
-@RibbonClient(configuration = {ClientConfig.class})
+@FeignClient(name = "SERVICE")
 public interface Service {
 
     @RequestMapping(value = "add/{a}/{b}", method = RequestMethod.GET) int add(@PathVariable("a") int a,

@@ -76,7 +76,7 @@ import java.util.regex.Pattern;
             }
             return instances;
         } else {
-            //todo:suimi
+            //todo:suimi 如果需要则重写
             return applications.getInstancesBySecureVirtualHostName(vipAddress);
 
         }
@@ -85,46 +85,7 @@ import java.util.regex.Pattern;
     //todo:suimi
     @Override public List<InstanceInfo> getInstancesByVipAddressAndAppName(String vipAddress, String appName,
         boolean secure) {
-        List<InstanceInfo> result = new ArrayList<InstanceInfo>();
-        if (vipAddress == null && appName == null) {
-            throw new IllegalArgumentException("Supplied VIP Address and application name cannot both be null");
-        } else if (vipAddress != null && appName == null) {
-            return getInstancesByVipAddress(vipAddress, secure);
-        } else if (vipAddress == null && appName != null) {
-            Application application = getApplication(appName);
-            if (application != null) {
-                result = application.getInstances();
-            }
-            return result;
-        }
-
-        String instanceVipAddress;
-        for (Application app : getApplications().getRegisteredApplications()) {
-            for (InstanceInfo instance : app.getInstances()) {
-                if (secure) {
-                    instanceVipAddress = instance.getSecureVipAddress();
-                } else {
-                    instanceVipAddress = instance.getVIPAddress();
-                }
-                if (instanceVipAddress == null) {
-                    continue;
-                }
-                String[] instanceVipAddresses = instanceVipAddress.split(",");
-
-                // If the VIP Address is delimited by a comma, then consider to
-                // be a list of VIP Addresses.
-                // Try to match at least one in the list, if it matches then
-                // return the instance info for the same
-                for (String vipAddressFromList : instanceVipAddresses) {
-                    if (vipAddress.equalsIgnoreCase(vipAddressFromList.trim()) && appName
-                        .equalsIgnoreCase(instance.getAppName())) {
-                        result.add(instance);
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
+        return super.getInstancesByVipAddressAndAppName(vipAddress, appName, secure);
     }
 
     private List<InstanceInfo> getInstances(Applications applications, String appName) {

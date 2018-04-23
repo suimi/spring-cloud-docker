@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "SERVICE-B",configuration = ClientConfig.class)
+@FeignClient(value = "SERVICE-B")
 public interface BService {
 
     @RequestMapping(value = "add/{a}/{b}", method = RequestMethod.GET)
