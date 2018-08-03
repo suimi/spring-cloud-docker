@@ -30,25 +30,25 @@
         <zipkin.version>1.28.1</zipkin.version>
         <docker.image.prefix>ulinkcare</docker.image.prefix>
         <!--<docker.repository.aliyun>registry.cn-hangzhou.aliyuncs.com</docker.repository.aliyun>-->
-        <docker.repository.aliyun>registry-internal.cn-hangzhou.aliyuncs.com</docker.repository.aliyun>
-        <docker.repository.ulinkcare>118.178.138.63:9020</docker.repository.ulinkcare>
+        <docker.repository.aliyun><!--aliyun repository--></docker.repository.aliyun>
+        <docker.repository.ulinkcare><!--local repository--></docker.repository.ulinkcare>
     </properties>
 
     <scm>
-        <url>scm:svn:http://118.178.138.63/repos/ulinkcare/</url>
-        <connection>scm:svn:svn://118.178.138.63/repos/src/common/trunk/cloud-common</connection>
-        <developerConnection>scm:svn:svn://118.178.138.63/repos/src/common/trunk/cloud-common
+        <url>scm:svn:http://...</url>
+        <connection>scm:svn:svn://...</connection>
+        <developerConnection>scm:svn:svn://...
         </developerConnection>
     </scm>
 
     <distributionManagement>
         <repository>
-            <id>ulinkcare-release</id>
-            <url>http://192.168.0.128:8081/repository/maven-releases</url>
+            <id>id</id>
+            <url>http://ip:port/repository/maven-releases</url>
         </repository>
         <snapshotRepository>
-            <id>ulinkcare-snapshot</id>
-            <url>http://192.168.0.128:8081/repository/maven-snapshots</url>
+            <id>id</id>
+            <url>http://ip:port/repository/maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -244,9 +244,9 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.5.2</version>
                     <configuration>
-                        <branchBase>http://118.178.138.63/repos/src/common/branches/cloud-common</branchBase>
+                        <branchBase>http://ip/repos/src/common/branches/cloud-common</branchBase>
                         <branchName>${project.version}-branch</branchName>
-                        <tagBase>http://118.178.138.63/repos/src/common/tags/cloud-common</tagBase>
+                        <tagBase>http://ip/repos/src/common/tags/cloud-common</tagBase>
                         <remoteTagging>false</remoteTagging>
                         <suppressCommitBeforeTag>false</suppressCommitBeforeTag>
                         <resume>true</resume>
