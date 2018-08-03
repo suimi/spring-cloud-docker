@@ -191,39 +191,6 @@
 
     <repositories>
         <repository>
-            <id>nexus-public</id>
-            <name>nexus-public</name>
-            <url>http://maven.primeledger.cn:8081/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>nexus-releases</id>
-            <name>nexus-releases</name>
-            <url>http://maven.primeledger.cn:8081/repository/maven-releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>nexus-snapshots</id>
-            <name>nexus-snapshots</name>
-            <url>http://maven.primeledger.cn:8081/repository/maven-snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>http://repo.spring.io/libs-snapshot-local</url>
