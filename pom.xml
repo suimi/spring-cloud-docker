@@ -27,7 +27,7 @@
         <spring.boot.admin>1.5.2</spring.boot.admin>
         <springfox.swagger2>2.6.0</springfox.swagger2>
         <net.sf.ucanaccess>3.0.7</net.sf.ucanaccess>
-        <zipkin.version>1.28.1</zipkin.version>
+        <zipkin.version>2.6.1</zipkin.version>
         <docker.image.prefix>ulinkcare</docker.image.prefix>
         <!--<docker.repository.aliyun>registry.cn-hangzhou.aliyuncs.com</docker.repository.aliyun>-->
         <docker.repository.aliyun><!--aliyun repository--></docker.repository.aliyun>
@@ -103,6 +103,7 @@
                 <artifactId>spring-boot-admin-server-ui-login</artifactId>
                 <version>${spring.boot.admin}</version>
             </dependency>
+            <!-- zipkin v1 -->
             <dependency>
                 <groupId>io.zipkin.java</groupId>
                 <artifactId>zipkin-server</artifactId>
@@ -189,32 +190,32 @@
         </profile>
     </profiles>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>http://repo.spring.io/libs-snapshot-local</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>http://repo.spring.io/libs-milestone-local</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>http://repo.spring.io/release</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>spring-snapshots</id>-->
+            <!--<name>Spring Snapshots</name>-->
+            <!--<url>http://repo.spring.io/libs-snapshot-local</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>spring-milestones</id>-->
+            <!--<name>Spring Milestones</name>-->
+            <!--<url>http://repo.spring.io/libs-milestone-local</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>spring-releases</id>-->
+            <!--<name>Spring Releases</name>-->
+            <!--<url>http://repo.spring.io/release</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <build>
         <pluginManagement>
